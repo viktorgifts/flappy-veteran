@@ -75,7 +75,7 @@
      update : function() {
         if(state.curr != state.Play) return;
         this.x -= dx;
-        this.x = this.x % (this.sprite.width/2);    
+        this.x = this.x % (this.sprite.width/2);
     }
  };
  const bg = {
@@ -161,9 +161,9 @@
                 {
                     state.curr = state.gameOver;
                 }
-                
+
                 break;
-            case state.gameOver : 
+            case state.gameOver :
                 this.frame = 1;
                 if(this.y + r  < gnd.y) {
                     this.y += this.speed;
@@ -179,10 +179,10 @@
                     SFX.played = true;
                 }
                 }
-                
+
                 break;
         }
-        this.frame = this.frame%this.animations.length;       
+        this.frame = this.frame%this.animations.length;
     },
     flap : function(){
         if(this.y > 0)
@@ -194,7 +194,7 @@
     setRotation : function(){
         if(this.speed <= 0)
         {
-            
+
             this.rotatation = Math.max(-25, -25 * this.speed/(-1*this.thrust));
         }
         else if(this.speed > 0 ) {
@@ -228,8 +228,8 @@
                 pipe.moved = false;
             }
 
-            
-                
+
+
         }
     }
  };
@@ -258,7 +258,7 @@
                 sctx.drawImage(this.tap[this.frame].sprite,this.tx,this.ty)
                 break;
             case state.gameOver :
-                this.y = parseFloat(scrn.height-this.gameOver.sprite.height)/2;
+                this.y = parseFloat(scrn.height-this.gameOver.sprite.height)/2-50;
                 this.x = parseFloat(scrn.width-this.gameOver.sprite.width)/2;
                 this.tx = parseFloat(scrn.width - this.tap[0].sprite.width)/2;
                 this.ty = this.y + this.gameOver.sprite.height- this.tap[0].sprite.height;
@@ -279,23 +279,23 @@
                 sctx.strokeText(this.score.curr,scrn.width/2-5,50);
                 break;
             case state.gameOver :
-                    sctx.lineWidth = "2";
+                    sctx.lineWidth = "1";
                     sctx.font = "40px Squada One";
                     let sc = `SCORE :     ${this.score.curr}`;
                     try {
                         this.score.best = Math.max(this.score.curr,localStorage.getItem("best"));
                         localStorage.setItem("best",this.score.best);
                         let bs = `BEST  :     ${this.score.best}`;
-                        sctx.fillText(sc,scrn.width/2-80,scrn.height/2+0);
-                        sctx.strokeText(sc,scrn.width/2-80,scrn.height/2+0);
-                        sctx.fillText(bs,scrn.width/2-80,scrn.height/2+30);
-                        sctx.strokeText(bs,scrn.width/2-80,scrn.height/2+30);
+                        sctx.fillText(sc,scrn.width/2-80,scrn.height/2+200);
+                        sctx.strokeText(sc,scrn.width/2-80,scrn.height/2+200);
+                        sctx.fillText(bs,scrn.width/2-80,scrn.height/2+150);
+                        sctx.strokeText(bs,scrn.width/2-80,scrn.height/2+150);
                     }
                     catch(e) {
                         sctx.fillText(sc,scrn.width/2-85,scrn.height/2+15);
                         sctx.strokeText(sc,scrn.width/2-85,scrn.height/2+15);
                     }
-                    
+
                 break;
         }
     },
@@ -328,7 +328,7 @@ SFX.die.src = "sfx/die.wav"
 gameLoop();
 
  function gameLoop()
- { 
+ {
      update();
      draw();
      frames++;
@@ -337,18 +337,18 @@ gameLoop();
 
  function update()
  {
-  bird.update();  
+  bird.update();
   gnd.update();
   pipe.update();
   UI.update();
  }
  function draw()
  {
-    sctx.fillStyle = "#30c0df";
+    sctx.fillStyle = "#B0B0B0";
     sctx.fillRect(0,0,scrn.width,scrn.height)
     bg.draw();
     pipe.draw();
-    
+
     bird.draw();
     gnd.draw();
     UI.draw();
